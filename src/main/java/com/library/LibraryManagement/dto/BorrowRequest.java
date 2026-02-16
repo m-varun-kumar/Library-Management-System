@@ -4,14 +4,14 @@ import lombok.Data;
 
 @Data
 public class BorrowRequest {
-    private Long bookId;
+    private String bookId;
     private String studentId;
 
-    public Long getBookId() {
+    public String getBookId() {
         return bookId;
     }
 
-    public void setBookId(Long bookId) {
+    public void setBookId(String bookId) {
         this.bookId = bookId;
     }
 
