@@ -1,0 +1,1702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Veltech Library Management System</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ===== GLOBAL RESET ===== */
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:'Poppins',sans-serif;
+}
+
+body{
+  background:#f4f6fb;
+  font-size:16px;
+  color:#111827;
+}
+
+/* ===== LOGIN PAGE WITH VELTECH BRANDING ===== */
+.login-page-wrapper{
+  min-height:100vh;
+  background:linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+  position:relative;
+  overflow:hidden;
+}
+
+.login-page-wrapper::before{
+  content:'';
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  background-image:url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" fill="none"/><path d="M0 50 Q 25 25, 50 50 T 100 50" stroke="white" stroke-width="0.5" fill="none" opacity="0.1"/></svg>');
+  opacity:0.3;
+}
+
+.login-container{
+  width:420px;
+  background:white;
+  padding:40px;
+  border-radius:16px;
+  box-shadow:0 20px 60px rgba(0,0,0,0.3);
+  text-align:center;
+  position:relative;
+  z-index:1;
+}
+
+.university-header{
+  margin-bottom:25px;
+}
+
+.university-logo{
+  width:80px;
+  height:80px;
+  margin:0 auto 15px;
+  background:linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:36px;
+  box-shadow:0 8px 20px rgba(102,126,234,0.3);
+}
+
+.university-name{
+  font-size:22px;
+  font-weight:600;
+  color:#667eea;
+  margin-bottom:5px;
+}
+
+.university-subtitle{
+  font-size:13px;
+  color:#6b7280;
+  margin-bottom:20px;
+}
+
+.login-container h2{
+  font-size:26px;
+  color:#1f2937;
+  margin-bottom:25px;
+  font-weight:600;
+}
+
+input{
+  width:100%;
+  padding:12px 15px;
+  margin:10px 0;
+  border:2px solid #e5e7eb;
+  border-radius:8px;
+  font-size:14px;
+  transition:0.3s;
+}
+
+input:focus{
+  outline:none;
+  border-color:#667eea;
+  box-shadow:0 0 0 3px rgba(102,126,234,0.1);
+}
+
+.password-input-wrapper{
+  position:relative;
+  width:100%;
+  margin:10px 0;
+}
+
+.password-input-wrapper input{
+  width:100%;
+  margin:0;
+  padding-right:45px;
+}
+
+.password-toggle{
+  position:absolute;
+  right:12px;
+  top:50%;
+  transform:translateY(-50%);
+  cursor:pointer;
+  user-select:none;
+  transition:0.3s;
+  opacity:0.6;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#667eea;
+}
+
+.password-toggle:hover{
+  opacity:1;
+  transform:translateY(-50%) scale(1.1);
+}
+
+.password-toggle.visible{
+  opacity:1;
+}
+
+.password-toggle svg{
+  display:block;
+}
+
+.input-hint{
+  font-size:11px;
+  color:#6b7280;
+  margin-top:-8px;
+  margin-bottom:10px;
+  text-align:left;
+  padding-left:5px;
+}
+
+button{
+  width:100%;
+  padding:12px 14px;
+  border:none;
+  border-radius:8px;
+  background:linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color:white;
+  cursor:pointer;
+  font-size:15px;
+  font-weight:600;
+  transition:0.3s;
+  margin-top:10px;
+}
+
+button:hover{
+  transform:translateY(-2px);
+  box-shadow:0 8px 20px rgba(102,126,234,0.4);
+}
+
+button:disabled{
+  background:#ccc;
+  cursor:not-allowed;
+  transform:none;
+  box-shadow:none;
+}
+
+a{
+  color:#667eea;
+  cursor:pointer;
+  font-size:14px;
+  font-weight:500;
+}
+
+a:hover{
+  text-decoration:underline;
+}
+
+/* ===== HEADER (FIXED) ===== */
+header{
+  background:linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color:white;
+  padding:16px 22px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-size:16px;
+  box-shadow:0 2px 10px rgba(0,0,0,0.1);
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  z-index:1000;
+  height:68px;
+}
+
+.header-title{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.header-logo{
+  width:40px;
+  height:40px;
+  background:white;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:20px;
+}
+
+.profile{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  position:relative;
+}
+
+.profile-image-wrapper{
+  position:relative;
+  cursor:pointer;
+}
+
+.profile img{
+  width:36px;
+  height:36px;
+  border-radius:50%;
+  border:2px solid white;
+  object-fit:cover;
+  transition:0.3s;
+}
+
+.profile img:hover{
+  transform:scale(1.1);
+  box-shadow:0 4px 12px rgba(0,0,0,0.3);
+}
+
+.profile-upload-input{
+  display:none;
+}
+
+.profile-edit-icon{
+  position:absolute;
+  bottom:-2px;
+  right:-2px;
+  background:#667eea;
+  border-radius:50%;
+  width:16px;
+  height:16px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:10px;
+  border:2px solid white;
+}
+
+/* Profile Menu */
+.profile-menu{
+  position:absolute;
+  top:50px;
+  right:0;
+  background:white;
+  border-radius:8px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.15);
+  padding:8px 0;
+  min-width:180px;
+  display:none;
+  z-index:1001;
+}
+
+.profile-menu.show{
+  display:block;
+}
+
+.profile-menu-item{
+  padding:10px 16px;
+  cursor:pointer;
+  transition:0.2s;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  color:#1f2937;
+  font-size:14px;
+}
+
+.profile-menu-item:hover{
+  background:#f3f4f6;
+}
+
+.profile-menu-item.delete{
+  color:#dc2626;
+}
+
+.profile-menu-item.delete:hover{
+  background:#fee2e2;
+}
+
+/* ===== LAYOUT ===== */
+.container{
+  display:flex;
+  min-height:100vh;
+  padding-top:68px;
+}
+
+/* ===== SIDEBAR (FIXED) ===== */
+aside{
+  background:#1f2937;
+  color:white;
+  padding:18px;
+  position:fixed;
+  left:0;
+  top:68px;
+  width:220px;
+  height:calc(100vh - 68px);
+  overflow-y:auto;
+  z-index:100;
+}
+
+aside h3{
+  margin-bottom:16px;
+  font-size:16px;
+}
+
+aside a{
+  display:block;
+  padding:10px;
+  margin-bottom:8px;
+  color:#d1d5db;
+  text-decoration:none;
+  border-radius:6px;
+  font-size:14px;
+  transition:0.3s;
+  cursor:pointer;
+}
+
+aside a:hover,
+aside a.active{
+  background:#374151;
+  color:white;
+  transform:translateX(8px);
+}
+
+/* ===== MAIN CONTENT AREA ===== */
+main{
+  margin-left:220px;
+  width:calc(100% - 220px);
+  min-height:calc(100vh - 68px);
+}
+
+/* ===== CONTENT SCROLL AREA ===== */
+.content-scroll-area{
+  max-height:calc(100vh - 68px);
+  overflow-y:auto;
+  overflow-x:hidden;
+  padding:30px 20px 20px 20px;
+}
+
+/* Custom scrollbar for content area */
+.content-scroll-area::-webkit-scrollbar {
+  width: 8px;
+}
+
+.content-scroll-area::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.content-scroll-area::-webkit-scrollbar-thumb {
+  background: #667eea;
+  border-radius: 4px;
+}
+
+.content-scroll-area::-webkit-scrollbar-thumb:hover {
+  background: #764ba2;
+}
+
+/* ===== CARDS ===== */
+.cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:16px;
+  margin-bottom:20px;
+}
+
+.card{
+  background:white;
+  padding:20px;
+  border-radius:10px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.05);
+  text-align:center;
+  transition:0.3s;
+}
+
+.card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 8px 20px rgba(0,0,0,0.1);
+}
+
+.card h4{
+  font-size:15px;
+  font-weight:500;
+  color:#6b7280;
+}
+
+.card p{
+  font-size:26px;
+  font-weight:600;
+  color:#667eea;
+  margin-top:8px;
+}
+
+/* ===== TABLE WITH STICKY HEADER (FIXED GAP ISSUE) ===== */
+.table-wrapper{
+  background:white;
+  border-radius:8px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.05);
+  margin-top:15px;
+  width:100%;
+  position:relative;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+}
+
+thead{
+  background:linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color:white;
+  position:sticky;
+  top:-1px;
+  z-index:10;
+  box-shadow:0 2px 8px rgba(0,0,0,0.15);
+}
+
+/* Add padding to cover gap above */
+thead::before{
+  content:'';
+  position:absolute;
+  top:-50px;
+  left:0;
+  right:0;
+  height:50px;
+  background:white;
+  z-index:-1;
+}
+
+thead tr{
+  background:linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+th{
+  padding:14px 12px;
+  text-align:center;
+  font-size:14px;
+  font-weight:600;
+  white-space:nowrap;
+  background:linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  position:relative;
+}
+
+td{
+  padding:12px;
+  text-align:center;
+  font-size:14px;
+  border-bottom:1px solid #eee;
+  background:white;
+}
+
+tbody tr{
+  background:white;
+  transition:0.2s;
+}
+
+tbody tr:hover{
+  background:#f9fafb;
+  box-shadow:0 2px 8px rgba(0,0,0,0.05);
+}
+
+.status{
+  padding:4px 10px;
+  border-radius:12px;
+  font-size:12px;
+  font-weight:500;
+}
+
+/* ===== VIEW BUTTON STYLES ===== */
+.view-btn{
+  background:#10b981;
+  color:white;
+  padding:6px 16px;
+  border:none;
+  border-radius:5px;
+  cursor:pointer;
+  font-size:13px;
+  transition:0.3s;
+  font-weight:500;
+  width:auto;
+}
+
+.view-btn:hover{
+  background:#059669;
+  transform:translateY(-2px);
+  box-shadow:0 4px 12px rgba(16,185,129,0.3);
+}
+
+/* ===== EXTEND BUTTON STYLES ===== */
+.extend-btn{
+  background:#f59e0b;
+  color:white;
+  padding:6px 16px;
+  border:none;
+  border-radius:5px;
+  cursor:pointer;
+  font-size:13px;
+  transition:0.3s;
+  font-weight:500;
+  width:auto;
+  margin-right:8px;
+}
+
+.extend-btn:hover{
+  background:#d97706;
+  transform:translateY(-2px);
+  box-shadow:0 4px 12px rgba(245,158,11,0.3);
+}
+
+.extend-btn:disabled{
+  background:#ccc;
+  cursor:not-allowed;
+  transform:none;
+  box-shadow:none;
+}
+
+/* ===== FINE BADGE ===== */
+.fine-badge{
+  display:inline-block;
+  background:#fee2e2;
+  color:#991b1b;
+  padding:4px 10px;
+  border-radius:12px;
+  font-size:12px;
+  font-weight:600;
+}
+
+.fine-badge.zero{
+  background:#dcfce7;
+  color:#166534;
+}
+
+/* ===== OVERDUE STATUS ===== */
+.overdue{
+  background:#fee2e2;
+  color:#991b1b;
+}
+
+.due-soon{
+  background:#fef3c7;
+  color:#92400e;
+}
+
+.on-time{
+  background:#dcfce7;
+  color:#166534;
+}
+
+/* ===== IMAGE PREVIEW ON HOVER ===== */
+.view-wrapper{
+  position:relative;
+  display:inline-block;
+}
+
+.hover-preview{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.85);
+  backdrop-filter:blur(10px);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  opacity:0;
+  visibility:hidden;
+  transition:opacity 0.3s ease, visibility 0.3s ease;
+  z-index:9999;
+}
+
+.view-btn:hover + .hover-preview{
+  opacity:1;
+  visibility:visible;
+}
+
+.hover-preview img{
+  width:auto;
+  height:auto;
+  max-width:400px;
+  max-height:550px;
+  border-radius:12px;
+  box-shadow:0 25px 50px rgba(0,0,0,0.5);
+  transform:scale(0.9);
+  transition:transform 0.3s ease;
+}
+
+.view-btn:hover + .hover-preview img{
+  transform:scale(1);
+}
+
+.available{
+  background:#dcfce7;
+  color:#166534;
+}
+
+.unavailable{
+  background:#fee2e2;
+  color:#991b1b;
+}
+
+/* ===== SEARCH - FIXED POSITIONING ===== */
+.search-box{
+  margin-bottom:25px;
+  margin-top:0;
+  width:100%;
+  position:relative;
+  z-index:50;
+  background:#f4f6fb;
+  padding-bottom:15px;
+}
+
+.search-box input{
+  padding:12px 15px;
+  width:400px;
+  max-width:100%;
+  border:2px solid #d1d5db;
+  border-radius:8px;
+  font-size:14px;
+  background:white;
+  transition:0.3s;
+  display:block;
+}
+
+.search-box input:focus{
+  outline:none;
+  border-color:#667eea;
+  box-shadow:0 0 0 3px rgba(102,126,234,0.1);
+}
+
+.search-box input::placeholder{
+  color:#9ca3af;
+}
+
+/* ===== FOOTER ===== */
+footer{
+  text-align:center;
+  margin-top:30px;
+  color:#6b7280;
+  font-size:13px;
+}
+
+/* ===== BORROWED BOOKS IMAGE ===== */
+.borrowed-img{
+  width:50px;
+  height:70px;
+  object-fit:cover;
+  border-radius:6px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* ===== TOAST NOTIFICATIONS ===== */
+.toast-container {
+  position: fixed;
+  top: 90px;
+  right: 20px;
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.toast {
+  min-width: 300px;
+  padding: 16px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  animation: slideIn 0.3s ease-out;
+  font-size: 14px;
+}
+
+.toast.success {
+  background: #dcfce7;
+  color: #166534;
+  border-left: 4px solid #22c55e;
+}
+
+.toast.error {
+  background: #fee2e2;
+  color: #991b1b;
+  border-left: 4px solid #ef4444;
+}
+
+.toast.warning {
+  background: #fef3c7;
+  color: #92400e;
+  border-left: 4px solid #f59e0b;
+}
+
+.toast.info {
+  background: #dbeafe;
+  color: #1e40af;
+  border-left: 4px solid #3b82f6;
+}
+
+.toast-icon {
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.toast-message {
+  flex: 1;
+}
+
+.toast-close {
+  cursor: pointer;
+  font-size: 18px;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+  flex-shrink: 0;
+}
+
+.toast-close:hover {
+  opacity: 1;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(400px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* ===== CONFIRMATION MODAL ===== */
+.confirm-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10001;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.confirm-modal {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: scaleIn 0.3s ease-out;
+}
+
+.confirm-modal-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.confirm-modal-icon {
+  font-size: 32px;
+}
+
+.confirm-modal-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.confirm-modal-message {
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 24px;
+  line-height: 1.5;
+}
+
+.confirm-modal-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.confirm-modal-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+  width: auto;
+  margin: 0;
+}
+
+.confirm-modal-button.cancel {
+  background: #f3f4f6;
+  color: #6b7280;
+}
+
+.confirm-modal-button.cancel:hover {
+  background: #e5e7eb;
+  transform: translateY(-1px);
+}
+
+.confirm-modal-button.confirm {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.confirm-modal-button.confirm:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+}
+
+.confirm-modal-button.confirm.danger {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+}
+
+.confirm-modal-button.confirm.danger:hover {
+  box-shadow: 0 8px 20px rgba(239, 68, 68, 0.4);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Toast Container -->
+<div class="toast-container" id="toastContainer"></div>
+
+<!-- LOGIN PAGE -->
+<div class="login-page-wrapper" id="loginPage">
+  <div class="login-container">
+    <div class="university-header">
+      <div class="university-logo">🎓</div>
+      <div class="university-name">Veltech University</div>
+      <div class="university-subtitle">Library Management System</div>
+    </div>
+    
+    <h2>Student Login</h2>
+    <input type="email" id="loginEmail" placeholder="College Email (e.g., 21AT1A05C2@veltech.edu.in)">
+    <div class="input-hint">📧 Use your Veltech email address</div>
+    <input type="password" id="loginPassword" placeholder="Password">
+    <button onclick="login()">Login</button>
+    <p style="margin-top:20px;">New Student? <a onclick="showSignup()">Signup</a></p>
+  </div>
+</div>
+
+<!-- SIGNUP PAGE -->
+<div class="login-page-wrapper" id="signupPage" style="display:none">
+  <div class="login-container">
+    <div class="university-header">
+      <div class="university-logo">🎓</div>
+      <div class="university-name">Veltech University</div>
+      <div class="university-subtitle">Library Management System</div>
+    </div>
+    
+    <h2>Create Account</h2>
+    <input type="text" id="signupName" placeholder="Full Name">
+    <input type="text" id="signupStudentId" placeholder="Student ID (e.g., 21AT1A05C2)" maxlength="20">
+    <div class="input-hint">📧 Email format: YourStudentID@veltech.edu.in</div>
+    <input type="email" id="signupEmail" placeholder="Email (e.g., 21AT1A05A7@veltech.edu.in)">
+    
+    <div class="password-input-wrapper">
+      <input type="password" id="signupPassword" placeholder="Password (min 6 characters)">
+      <span class="password-toggle" onclick="togglePassword('signupPassword', this)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg></span>
+    </div>
+    
+    <div class="password-input-wrapper">
+      <input type="password" id="signupConfirmPassword" placeholder="Confirm Password">
+      <span class="password-toggle" onclick="togglePassword('signupConfirmPassword', this)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg></span>
+    </div>
+    
+    <button onclick="signup()">Signup</button>
+    <p style="margin-top:20px;"><a onclick="showLogin()">Back to Login</a></p>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboard" style="display:none">
+
+<header>
+  <div class="header-title">
+    <div class="header-logo">🎓</div>
+    <div>
+      <div style="font-size:18px; font-weight:600;">Veltech Library</div>
+      <div style="font-size:12px; opacity:0.9;">Library Management System</div>
+    </div>
+  </div>
+  <div class="profile">
+    <span id="welcomeText">Welcome Student</span>
+    <div class="profile-image-wrapper" onclick="toggleProfileMenu()">
+      <img id="profileImage" src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png">
+      <div class="profile-edit-icon">✏️</div>
+    </div>
+    <input type="file" id="profileUpload" class="profile-upload-input" accept="image/*" onchange="handleProfileUpload(event)">
+    
+    <!-- Profile Menu -->
+    <div class="profile-menu" id="profileMenu">
+      <div class="profile-menu-item" onclick="document.getElementById('profileUpload').click(); toggleProfileMenu();">
+        <span>📤</span> Upload Picture
+      </div>
+      <div class="profile-menu-item delete" onclick="deleteProfilePicture()">
+        <span>🗑️</span> Delete Picture
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+<aside>
+<h3>Dashboard</h3>
+<a onclick="showSection('overview')" class="active">Overview</a>
+<a onclick="showSection('books')">View Books</a>
+<a onclick="showSection('borrowed')">Borrowed Books</a>
+<a onclick="showSection('returnSection')">Return Books</a>
+<a onclick="logout()">Logout</a>
+</aside>
+
+<main>
+<div class="content-scroll-area">
+
+<section id="overview">
+<div class="cards">
+<div class="card"><h4>Total Borrowed</h4><p id="totalBorrow">0</p></div>
+<div class="card"><h4>Total Books</h4><p id="totalBooks">30</p></div>
+<div class="card"><h4>Total Fines</h4><p id="totalFines">₹0</p></div>
+</div>
+
+<h3>Recently Added Books</h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>ID</th><th>Book</th><th>Author</th><th>Available</th></tr>
+</thead>
+<tbody id="recentBooksTable"></tbody>
+</table>
+</div>
+</section>
+
+<section id="books" style="display:none">
+<h3>Engineering Library Books</h3>
+<div class="search-box">
+<input type="text" id="searchInput" placeholder="Search by book or author...">
+</div>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>ID</th><th>Preview</th><th>Book Name</th><th>Author</th><th>Available</th><th>Status</th><th>Action</th></tr>
+</thead>
+<tbody id="bookTable"></tbody>
+</table>
+</div>
+</section>
+
+<section id="borrowed" style="display:none">
+<h3>Borrowed Books</h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>ID</th><th>Book Image</th><th>Book</th><th>Author</th><th>Issue Date</th><th>Due Date</th><th>Days Left</th><th>Fine</th></tr>
+</thead>
+<tbody id="borrowTable"></tbody>
+</table>
+</div>
+</section>
+
+<section id="returnSection" style="display:none">
+<h3>Return Books</h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>ID</th><th>Book Image</th><th>Book</th><th>Author</th><th>Due Date</th><th>Fine</th><th>Action</th></tr>
+</thead>
+<tbody id="returnTable"></tbody>
+</table>
+</div>
+</section>
+
+<footer>© 2026 Veltech University Library System</footer>
+</div>
+</main>
+</div>
+</div>
+
+<script>
+// ===== BOOK IMAGES MAPPING =====
+const bookImages = {
+  1: "https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1186657123i/1672563.jpg",
+  2: "https://covers.openlibrary.org/b/isbn/9780201616224-L.jpg",
+  3: "https://covers.openlibrary.org/b/isbn/9780735619678-L.jpg",
+  4: "https://covers.openlibrary.org/b/isbn/9780201633610-L.jpg",
+  5: "https://covers.openlibrary.org/b/isbn/9780201485677-L.jpg",
+  6: "https://covers.openlibrary.org/b/isbn/9780262033848-L.jpg",
+  7: "https://covers.openlibrary.org/b/isbn/9781617292231-L.jpg",
+  8: "https://covers.openlibrary.org/b/isbn/9780201896831-L.jpg",
+  9: "https://covers.openlibrary.org/b/isbn/9780133594140-L.jpg",
+  10: "https://covers.openlibrary.org/b/isbn/9781118063330-L.jpg",
+  11: "https://covers.openlibrary.org/b/isbn/9780073523323-L.jpg",
+  12: "https://covers.openlibrary.org/b/isbn/9780131103627-L.jpg",
+  13: "https://covers.openlibrary.org/b/isbn/9780134685991-L.jpg",
+  14: "https://covers.openlibrary.org/b/isbn/9780596009205-L.jpg",
+  15: "https://covers.openlibrary.org/b/isbn/9781593279288-L.jpg",
+  16: "https://covers.openlibrary.org/b/isbn/9780136042594-L.jpg",
+  17: "https://covers.openlibrary.org/b/isbn/9780070428072-L.jpg",
+  18: "https://covers.openlibrary.org/b/isbn/9780262035613-L.jpg",
+  19: "https://covers.openlibrary.org/b/isbn/9781617294945-L.jpg",
+  20: "https://covers.openlibrary.org/b/isbn/9781491931820-L.jpg",
+  21: "https://covers.openlibrary.org/b/isbn/9781736049112-L.jpg",
+  22: "https://covers.openlibrary.org/b/isbn/9780672329463-L.jpg",
+  23: "https://covers.openlibrary.org/b/isbn/9780470887998-L.jpg",
+  24: "https://covers.openlibrary.org/b/isbn/9781484226032-L.jpg",
+  25: "https://covers.openlibrary.org/b/isbn/9780123747501-L.jpg",
+  26: "https://covers.openlibrary.org/b/isbn/9780321486813-L.jpg",
+  27: "https://covers.openlibrary.org/b/isbn/9780123814791-L.jpg",
+  28: "https://covers.openlibrary.org/b/isbn/9781449373320-L.jpg",
+  29: "https://covers.openlibrary.org/b/isbn/9780134527338-L.jpg",
+  30: "https://covers.openlibrary.org/b/isbn/9780078022128-L.jpg"
+};
+
+const DEFAULT_BOOK_IMAGE = "https://via.placeholder.com/60x80/667eea/ffffff?text=Book";
+
+// ===== FINE CALCULATION CONSTANTS =====
+const INITIAL_BORROW_DAYS = 15;
+const EXTENSION_DAYS = 10;
+const FINE_PER_WEEK = 20;
+
+// ===== PROFILE MENU TOGGLE =====
+function toggleProfileMenu() {
+    const menu = document.getElementById('profileMenu');
+    menu.classList.toggle('show');
+}
+
+// Close menu when clicking outside
+document.addEventListener('click', function(event) {
+    const menu = document.getElementById('profileMenu');
+    const profileWrapper = document.querySelector('.profile-image-wrapper');
+    
+    if (menu && profileWrapper && !profileWrapper.contains(event.target) && !menu.contains(event.target)) {
+        menu.classList.remove('show');
+    }
+});
+
+// ===== PROFILE PICTURE UPLOAD =====
+function handleProfileUpload(event) {
+    const file = event.target.files[0];
+    if (file) {
+        if (!file.type.startsWith('image/')) {
+            showToast('Please select a valid image file', 'error');
+            return;
+        }
+        
+        if (file.size > 5 * 1024 * 1024) {
+            showToast('Image size should be less than 5MB', 'error');
+            return;
+        }
+        
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const img = document.getElementById('profileImage');
+            img.src = e.target.result;
+            localStorage.setItem('profileImage_' + currentStudent.studentId, e.target.result);
+            showToast('Profile picture updated successfully!', 'success');
+            toggleProfileMenu();
+        };
+        reader.readAsDataURL(file);
+    }
+}
+
+// ===== DELETE PROFILE PICTURE =====
+function deleteProfilePicture() {
+    showConfirm(
+        'Are you sure you want to delete your profile picture? This action cannot be undone.',
+        function() {
+            const img = document.getElementById('profileImage');
+            img.src = 'https://cdn-icons-png.flaticon.com/512/3135/3135715.png';
+            localStorage.removeItem('profileImage_' + currentStudent.studentId);
+            showToast('Profile picture deleted successfully!', 'info');
+            toggleProfileMenu();
+        },
+        {
+            title: 'Delete Profile Picture',
+            icon: '🗑️',
+            confirmText: 'Delete',
+            isDanger: true
+        }
+    );
+}
+
+function loadProfilePicture() {
+    if (currentStudent) {
+        const savedImage = localStorage.getItem('profileImage_' + currentStudent.studentId);
+        if (savedImage) {
+            document.getElementById('profileImage').src = savedImage;
+        }
+    }
+}
+
+// ===== CALCULATE FINE =====
+function calculateFine(dueDate, isExtended = false) {
+    const today = new Date();
+    const due = new Date(dueDate);
+    const diffTime = today - due;
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    
+    if (diffDays <= 0) {
+        return 0; // No fine if not overdue
+    }
+    
+    // Calculate weeks overdue (rounded up)
+    const weeksOverdue = Math.ceil(diffDays / 7);
+    return weeksOverdue * FINE_PER_WEEK;
+}
+
+// ===== CALCULATE DAYS LEFT =====
+function getDaysLeft(dueDate) {
+    const today = new Date();
+    const due = new Date(dueDate);
+    const diffTime = due - today;
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    return diffDays;
+}
+
+// ===== GET STATUS CLASS =====
+function getStatusClass(daysLeft) {
+    if (daysLeft < 0) return 'overdue';
+    if (daysLeft <= 3) return 'due-soon';
+    return 'on-time';
+}
+
+// ===== TOAST NOTIFICATION SYSTEM =====
+function showToast(message, type = 'info') {
+    const container = document.getElementById('toastContainer');
+    const toast = document.createElement('div');
+    toast.className = `toast ${type}`;
+    
+    const icons = {
+        success: '✓',
+        error: '✕',
+        warning: '⚠',
+        info: 'ℹ'
+    };
+    
+    toast.innerHTML = `
+        <span class="toast-icon">${icons[type]}</span>
+        <span class="toast-message">${message}</span>
+        <span class="toast-close" onclick="this.parentElement.remove()">×</span>
+    `;
+    
+    container.appendChild(toast);
+    
+    setTimeout(() => {
+        toast.style.animation = 'slideOut 0.3s ease-out';
+        setTimeout(() => toast.remove(), 300);
+    }, 4000);
+}
+
+// ===== PASSWORD VISIBILITY TOGGLE =====
+function togglePassword(inputId, toggleElement) {
+    const input = document.getElementById(inputId);
+    if (input.type === 'password') {
+        input.type = 'text';
+        toggleElement.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>';
+        toggleElement.classList.add('visible');
+    } else {
+        input.type = 'password';
+        toggleElement.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>';
+        toggleElement.classList.remove('visible');
+    }
+}
+
+// ===== CONFIRMATION MODAL =====
+function showConfirm(message, onConfirm, options = {}) {
+    const {
+        title = 'Confirm Action',
+        icon = '❓',
+        confirmText = 'Confirm',
+        cancelText = 'Cancel',
+        isDanger = false
+    } = options;
+
+    const overlay = document.createElement('div');
+    overlay.className = 'confirm-modal-overlay';
+    
+    overlay.innerHTML = `
+        <div class="confirm-modal">
+            <div class="confirm-modal-header">
+                <span class="confirm-modal-icon">${icon}</span>
+                <h3 class="confirm-modal-title">${title}</h3>
+            </div>
+            <p class="confirm-modal-message">${message}</p>
+            <div class="confirm-modal-buttons">
+                <button class="confirm-modal-button cancel" onclick="this.closest('.confirm-modal-overlay').remove()">
+                    ${cancelText}
+                </button>
+                <button class="confirm-modal-button confirm ${isDanger ? 'danger' : ''}" id="confirmBtn">
+                    ${confirmText}
+                </button>
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(overlay);
+    
+    // Handle confirm button
+    document.getElementById('confirmBtn').onclick = function() {
+        overlay.remove();
+        onConfirm();
+    };
+    
+    // Handle overlay click (close on outside click)
+    overlay.onclick = function(e) {
+        if (e.target === overlay) {
+            overlay.remove();
+        }
+    };
+}
+
+// ===== API CONFIGURATION =====
+const API_URL = "http://localhost:8080/api";
+let currentStudent = null;
+let books = [];
+let borrowed = [];
+
+// ===== EMAIL VALIDATION FOR VELTECH =====
+function validateVeltechEmail(email) {
+    const veltechPattern = /^[a-zA-Z0-9._%+-]+@veltech\.edu\.in$/i;
+    return veltechPattern.test(email);
+}
+
+// ===== LOGIN =====
+async function login() {
+    const email = document.getElementById('loginEmail').value.trim();
+    const password = document.getElementById('loginPassword').value.trim();
+    
+    if (!email || !password) {
+        showToast('Please fill in all fields', 'warning');
+        return;
+    }
+    
+    if (!validateVeltechEmail(email)) {
+        showToast('Please use a valid Veltech email (@veltech.edu.in)', 'error');
+        return;
+    }
+    
+    try {
+        const response = await fetch(`${API_URL}/auth/login`, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                studentId: email,
+                password: password
+            })
+        });
+        
+        if (response.ok) {
+            currentStudent = await response.json();
+            document.getElementById('welcomeText').innerText = `Welcome ${currentStudent.fullName}`;
+            document.getElementById('loginPage').style.display = "none";
+            document.getElementById('dashboard').style.display = "block";
+            showToast('Login successful! Welcome to Veltech Library.', 'success');
+            loadProfilePicture();
+            await loadBooks();
+            await loadBorrowed();
+        } else {
+            const error = await response.text();
+            showToast(error || 'Invalid credentials', 'error');
+        }
+    } catch (error) {
+        showToast('Login failed: ' + error.message, 'error');
+    }
+}
+
+// ===== SIGNUP =====
+async function signup() {
+    const fullName = document.getElementById('signupName').value.trim();
+    const studentId = document.getElementById('signupStudentId').value.trim();
+    const email = document.getElementById('signupEmail').value.trim();
+    const password = document.getElementById('signupPassword').value.trim();
+    const confirmPassword = document.getElementById('signupConfirmPassword').value.trim();
+    
+    if (!fullName || !studentId || !email || !password || !confirmPassword) {
+        showToast('Please fill in all fields', 'warning');
+        return;
+    }
+    
+    if (password !== confirmPassword) {
+        showToast('Passwords do not match', 'error');
+        return;
+    }
+    
+    if (studentId.length < 10 || studentId.length > 20) {
+        showToast('Student ID must be between 10-20 characters', 'error');
+        return;
+    }
+    
+    if (!/^[a-zA-Z0-9]{10,20}$/.test(studentId)) {
+        showToast('Student ID must contain only letters and numbers', 'error');
+        return;
+    }
+    
+    if (!validateVeltechEmail(email)) {
+        showToast('Email must be a valid Veltech email (@veltech.edu.in)', 'error');
+        return;
+    }
+    
+    if (password.length < 6) {
+        showToast('Password must be at least 6 characters', 'error');
+        return;
+    }
+    
+    try {
+        const response = await fetch(`${API_URL}/auth/signup`, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({fullName, studentId, email, password})
+        });
+        
+        if (response.ok) {
+            const student = await response.json();
+            showToast(`Signup successful! Welcome to Veltech Library. Please login with your email: ${email}`, 'success');
+            document.getElementById('signupName').value = '';
+            document.getElementById('signupStudentId').value = '';
+            document.getElementById('signupEmail').value = '';
+            document.getElementById('signupPassword').value = '';
+            document.getElementById('signupConfirmPassword').value = '';
+            showLogin();
+        } else {
+            const error = await response.text();
+            showToast(error || 'Signup failed', 'error');
+        }
+    } catch (error) {
+        showToast('Signup failed: ' + error.message, 'error');
+    }
+}
+
+// ===== LOAD BOOKS =====
+async function loadBooks() {
+    try {
+        const response = await fetch(`${API_URL}/books`);
+        books = await response.json();
+        document.getElementById('totalBooks').innerText = books.length;
+        displayBooks();
+        loadRecentBooks();
+    } catch (error) {
+        console.error('Failed to load books:', error);
+        showToast('Failed to load books', 'error');
+    }
+}
+
+function getBookImage(bookId) {
+    return bookImages[bookId] || DEFAULT_BOOK_IMAGE;
+}
+
+function displayBooks() {
+    let html = "";
+    books.forEach(b => {
+        let status = b.availableQuantity > 0 ? "available" : "unavailable";
+        let text = b.availableQuantity > 0 ? "Available" : "Not Available";
+        let bookImage = getBookImage(b.id);
+        
+        html += `<tr>
+            <td>${b.id}</td>
+            <td>
+                <div class="view-wrapper">
+                    <button class="view-btn">View</button>
+                    <div class="hover-preview">
+                        <img src="${bookImage}" alt="${b.name}">
+                    </div>
+                </div>
+            </td>
+            <td>${b.name}</td>
+            <td>${b.author}</td>
+            <td>${b.availableQuantity}</td>
+            <td><span class="status ${status}">${text}</span></td>
+            <td>${b.availableQuantity > 0 ? 
+                `<button onclick="confirmBorrowBook(${b.id}, '${b.name.replace(/'/g, "\\'")}', '${b.author.replace(/'/g, "\\'")}')" style="width:auto;">Borrow</button>` : 
+                `<button disabled style="width:auto;">Borrow</button>`}
+            </td>
+        </tr>`;
+    });
+    document.getElementById('bookTable').innerHTML = html;
+}
+
+// ===== CONFIRM BORROW BOOK =====
+function confirmBorrowBook(bookId, bookName, bookAuthor) {
+    showConfirm(
+        `Do you want to borrow "${bookName}" by ${bookAuthor}? You will have ${INITIAL_BORROW_DAYS} days to return it.`,
+        function() {
+            borrowBook(bookId);
+        },
+        {
+            title: 'Borrow Book',
+            icon: '📖',
+            confirmText: 'Borrow',
+            isDanger: false
+        }
+    );
+}
+
+function loadRecentBooks() {
+    document.getElementById('recentBooksTable').innerHTML = books.slice(-5).reverse()
+        .map(b => `<tr><td>${b.id}</td><td>${b.name}</td><td>${b.author}</td><td>${b.availableQuantity}</td></tr>`)
+        .join("");
+}
+
+// ===== BORROW BOOK =====
+async function borrowBook(bookId) {
+    try {
+        const response = await fetch(`${API_URL}/borrow`, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                bookId: bookId,
+                studentId: currentStudent.studentId
+            })
+        });
+        
+        if (response.ok) {
+            showToast('Book borrowed successfully! Return within 15 days to avoid fines.', 'success');
+            await loadBooks();
+            await loadBorrowed();
+        } else {
+            const error = await response.text();
+            showToast(error || 'Failed to borrow book', 'error');
+        }
+    } catch (error) {
+        showToast('Failed to borrow book: ' + error.message, 'error');
+    }
+}
+
+// ===== EXTEND BOOK =====
+async function extendBook(borrowedBookId, bookName) {
+    showConfirm(
+        `Do you want to extend "${bookName}" for ${EXTENSION_DAYS} more days?`,
+        async function() {
+            try {
+                const response = await fetch(`${API_URL}/borrow/extend/${borrowedBookId}`, {
+                    method: 'PUT'
+                });
+                
+                if (response.ok) {
+                    showToast(`Book extended successfully! You have ${EXTENSION_DAYS} more days.`, 'success');
+                    await loadBorrowed();
+                } else {
+                    const error = await response.text();
+                    showToast(error || 'Failed to extend book', 'error');
+                }
+            } catch (error) {
+                showToast('Failed to extend book: ' + error.message, 'error');
+            }
+        },
+        {
+            title: 'Extend Book',
+            icon: '📅',
+            confirmText: 'Extend',
+            isDanger: false
+        }
+    );
+}
+
+// ===== LOAD BORROWED BOOKS =====
+async function loadBorrowed() {
+    try {
+        const response = await fetch(`${API_URL}/borrow/student/${currentStudent.studentId}`);
+        borrowed = await response.json();
+        displayBorrowed();
+        displayReturn();
+        updateStats();
+    } catch (error) {
+        console.error('Failed to load borrowed books:', error);
+    }
+}
+
+function displayBorrowed() {
+    document.getElementById('borrowTable').innerHTML = borrowed.map(b => {
+        let bookImage = getBookImage(b.book.id);
+        const daysLeft = getDaysLeft(b.dueDate);
+        const statusClass = getStatusClass(daysLeft);
+        const fine = calculateFine(b.dueDate, b.extended);
+        
+        let daysLeftText = daysLeft >= 0 ? `${daysLeft} days` : `${Math.abs(daysLeft)} days overdue`;
+        
+        return `<tr>
+            <td>${b.book.id}</td>
+            <td><img src="${bookImage}" class="borrowed-img" alt="${b.book.name}"></td>
+            <td>${b.book.name}</td>
+            <td>${b.book.author}</td>
+            <td>${new Date(b.issueDate).toLocaleDateString()}</td>
+            <td>${new Date(b.dueDate).toLocaleDateString()}</td>
+            <td><span class="status ${statusClass}">${daysLeftText}</span></td>
+            <td><span class="fine-badge ${fine === 0 ? 'zero' : ''}">₹${fine}</span></td>
+        </tr>`;
+    }).join("");
+}
+
+function displayReturn() {
+    document.getElementById('returnTable').innerHTML = borrowed.map(b => {
+        let bookImage = getBookImage(b.book.id);
+        const fine = calculateFine(b.dueDate, b.extended);
+        const canExtend = !b.extended;
+        
+        return `<tr>
+            <td>${b.book.id}</td>
+            <td><img src="${bookImage}" class="borrowed-img" alt="${b.book.name}"></td>
+            <td>${b.book.name}</td>
+            <td>${b.book.author}</td>
+            <td>${new Date(b.dueDate).toLocaleDateString()}</td>
+            <td><span class="fine-badge ${fine === 0 ? 'zero' : ''}">₹${fine}</span></td>
+            <td>
+                ${canExtend ? `<button class="extend-btn" onclick="extendBook(${b.id}, '${b.book.name.replace(/'/g, "\\'")}')">Extend</button>` : ''}
+                <button onclick="confirmReturnBook(${b.id}, '${b.book.name.replace(/'/g, "\\'")}'${fine > 0 ? `, ${fine}` : ''})" style="width:auto;">Return</button>
+            </td>
+        </tr>`;
+    }).join("");
+}
+
+// ===== CONFIRM RETURN BOOK =====
+function confirmReturnBook(borrowedBookId, bookName, fine = 0) {
+    const message = fine > 0 
+        ? `Are you sure you want to return "${bookName}"? You have a pending fine of ₹${fine}.`
+        : `Are you sure you want to return "${bookName}"?`;
+    
+    showConfirm(
+        message,
+        function() {
+            returnBook(borrowedBookId);
+        },
+        {
+            title: 'Return Book',
+            icon: '📚',
+            confirmText: 'Return Book',
+            isDanger: false
+        }
+    );
+}
+
+// ===== RETURN BOOK =====
+async function returnBook(borrowedBookId) {
+    try {
+        const response = await fetch(`${API_URL}/borrow/return/${borrowedBookId}`, {
+            method: 'PUT'
+        });
+        
+        if (response.ok) {
+            showToast('Book returned successfully!', 'success');
+            await loadBooks();
+            await loadBorrowed();
+        } else {
+            const error = await response.text();
+            showToast(error || 'Failed to return book', 'error');
+        }
+    } catch (error) {
+        showToast('Failed to return book: ' + error.message, 'error');
+    }
+}
+
+// ===== UPDATE STATS =====
+function updateStats() {
+    document.getElementById('totalBorrow').innerText = borrowed.length;
+    
+    // Calculate total fines
+    const totalFines = borrowed.reduce((sum, b) => {
+        return sum + calculateFine(b.dueDate, b.extended);
+    }, 0);
+    
+    document.getElementById('totalFines').innerText = `₹${totalFines}`;
+}
+
+// ===== SEARCH BOOKS =====
+let searchTimeout;
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('searchInput');
+    if (searchInput) {
+        searchInput.addEventListener('input', function(e) {
+            clearTimeout(searchTimeout);
+            const query = e.target.value.trim();
+            
+            searchTimeout = setTimeout(async () => {
+                if (query.length === 0) {
+                    await loadBooks();
+                    return;
+                }
+                
+                try {
+                    const response = await fetch(`${API_URL}/books/search?query=${encodeURIComponent(query)}`);
+                    books = await response.json();
+                    displayBooks();
+                } catch (error) {
+                    console.error('Search failed:', error);
+                }
+            }, 300);
+        });
+    }
+});
+
+// ===== UI FUNCTIONS =====
+function logout() {
+    showConfirm(
+        'Are you sure you want to logout? You will need to login again to access your account.',
+        function() {
+            currentStudent = null;
+            books = [];
+            borrowed = [];
+            showToast('Logged out successfully', 'info');
+            setTimeout(() => location.reload(), 1000);
+        },
+        {
+            title: 'Logout',
+            icon: '🚪',
+            confirmText: 'Logout',
+            isDanger: false
+        }
+    );
+}
+
+function showSignup() {
+    document.getElementById('loginPage').style.display = "none";
+    document.getElementById('signupPage').style.display = "flex";
+}
+
+function showLogin() {
+    document.getElementById('signupPage').style.display = "none";
+    document.getElementById('loginPage').style.display = "flex";
+}
+
+function showSection(id) {
+    document.querySelectorAll("main section").forEach(s => s.style.display = "none");
+    document.getElementById(id).style.display = "block";
+    document.querySelectorAll("aside a").forEach(a => a.classList.remove("active"));
+    event.target.classList.add("active");
+    
+    // Reset scroll position to top when switching sections
+    const scrollArea = document.querySelector('.content-scroll-area');
+    if (scrollArea) {
+        scrollArea.scrollTop = 0;
+    }
+}
+</script>
+</body>
+</html>
