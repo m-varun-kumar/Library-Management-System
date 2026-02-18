@@ -583,7 +583,7 @@ main{
 
 /* ===== TABLE WITH STICKY HEADER ===== */
 .table-wrapper{
-  background:white;
+  background:whitesmoke;
   border-radius:8px;
   box-shadow:0 4px 12px rgba(0,0,0,0.05);
   margin-top:15px;
@@ -607,13 +607,14 @@ thead{
 
 thead::before{
   content:'';
-  position:absolute;
+  position:relative;
   top:-50px;
   left:0;
   right:0;
   height:50px;
-  background:white;
+  background:rgb(105, 120, 135);
   z-index:-1;
+  
 }
 
 thead tr{
@@ -1224,12 +1225,12 @@ footer{
 <div class="card"><h4>Total Fines</h4><p id="totalFines">₹0</p></div>
 </div>
 
-<h3 class="section-title" style="display: block !important; visibility: visible !important; opacity: 1 !important; height: auto !important; min-height: 30px !important; font-size: 22px !important; color: #111827 !important; margin: 25px 0 15px 5px !important;">Recently Added Books</h3>
+<h3 class="section-title" style="background-color: lightgray; padding: 10px; text-align: center; border-radius: 5px; margin-bottom: 15px;"> Recently Added Books</h3>
 
 <div class="table-wrapper">
 <table>
 <thead>
-<tr><th>ID</th><th>Preview</th><th>Book Name</th><th>Author</th><th>Edition</th><th>Available</th><th>Status</th><th>Action</th></tr>
+<tr><th>Book ID</th><th>Preview</th><th>Book Name</th><th>Author</th><th>Edition</th><th>Available</th><th>Status</th><th>Action</th></tr>
 </thead>
 <tbody id="recentBooksTable"></tbody>
 </table>
@@ -1244,7 +1245,7 @@ footer{
 <div class="table-wrapper">
 <table>
 <thead>
-<tr><th>ID</th><th>Preview</th><th>Book Name</th><th>Author</th><th>Edition</th><th>Available</th><th>Status</th><th>Action</th></tr>
+<tr><th>Book ID</th><th>Preview</th><th>Book Name</th><th>Author</th><th>Edition</th><th>Available</th><th>Status</th><th>Action</th></tr>
 </thead>
 <tbody id="bookTable"></tbody>
 </table>
@@ -1256,7 +1257,7 @@ footer{
 <div class="table-wrapper">
 <table>
 <thead>
-<tr><th>ID</th><th>Book Image</th><th>Book</th><th>Author</th><th>Issue Date</th><th>Due Date</th><th>Days Left</th><th>Fine</th></tr>
+<tr><th>Book ID</th><th>Book Image</th><th>Book</th><th>Author</th><th>Issue Date</th><th>Due Date</th><th>Days Left</th><th>Fine</th></tr>
 </thead>
 <tbody id="borrowTable"></tbody>
 </table>
@@ -1268,7 +1269,7 @@ footer{
 <div class="table-wrapper">
 <table>
 <thead>
-<tr><th>ID</th><th>Book Image</th><th>Book</th><th>Author</th><th>Due Date</th><th>Fine</th><th>Action</th></tr>
+<tr><th>Book ID</th><th>Book Image</th><th>Book</th><th>Author</th><th>Due Date</th><th>Fine</th><th>Action</th></tr>
 </thead>
 <tbody id="returnTable"></tbody>
 </table>
