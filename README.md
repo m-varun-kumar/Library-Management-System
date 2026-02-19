@@ -84,7 +84,7 @@ This project was built for:
 ---
 
 ## 👨‍💻 Developed By
-**K HARIKA**   
+**M Varun Kumar**   
 Java Full Stack Developer  
 DSA | Java | MySQL | System Design  
 
