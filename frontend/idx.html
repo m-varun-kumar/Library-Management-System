@@ -5,8 +5,25 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Veltech Library Management System</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
+
+h3.section-title,
+.section-title {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    font-size: 22px !important;
+    font-weight: 600 !important;
+    color: #374151 !important;
+    margin: 25px 0 15px 5px !important;
+    padding: 10px 0 !important;
+    background: transparent !important;
+    border: none !important;
+    position: relative !important;
+    z-index: 10000 !important;
+}
+
 /* ===== GLOBAL RESET ===== */
 *{
   box-sizing:border-box;
@@ -21,18 +38,20 @@ body{
   color:#111827;
 }
 
-/* ===== LOGIN PAGE WITH VELTECH BRANDING ===== */
+/* ===== NEW HERO LOGIN/SIGNUP STYLES ===== */
 .login-page-wrapper{
-  min-height:100vh;
-  background:linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  padding:20px;
+  height:100vh;
+  background:url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=1600&q=80') no-repeat center center/cover;
+  background-attachment:fixed;
   position:relative;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:0 80px;
   overflow:hidden;
 }
 
+/* Dark overlay */
 .login-page-wrapper::before{
   content:'';
   position:absolute;
@@ -40,78 +59,162 @@ body{
   left:0;
   right:0;
   bottom:0;
-  background-image:url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" fill="none"/><path d="M0 50 Q 25 25, 50 50 T 100 50" stroke="white" stroke-width="0.5" fill="none" opacity="0.1"/></svg>');
-  opacity:0.3;
-}
-
-.login-container{
-  width:420px;
-  background:white;
-  padding:40px;
-  border-radius:16px;
-  box-shadow:0 20px 60px rgba(0,0,0,0.3);
-  text-align:center;
-  position:relative;
+  background:rgba(0,0,0,0.55);
   z-index:1;
 }
 
+/* Hero text section */
+.hero-text{
+  position:relative;
+  z-index:2;
+  width:50%;
+  color:white;
+}
+
+.hero-text h1{
+  font-size:52px;
+  font-weight:700;
+  margin-bottom:20px;
+  line-height:1.2;
+}
+
+.hero-text h1 .highlight{
+  color:#667eea;;
+}
+
+.hero-text p{
+  font-size:18px;
+  color:#ddd;
+  line-height:1.6;
+  max-width:500px;
+}
+
+.hero-text .features{
+  margin-top:30px;
+  display:flex;
+  flex-direction:column;
+  gap:15px;
+}
+
+.hero-text .feature-item{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-size:16px;
+}
+
+.hero-text .feature-item .icon{
+  width:40px;
+  height:40px;
+  background:rgba(243,156,18,0.2);
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:20px;
+}
+
+/* Login/Signup container - MADE MORE COMPACT */
+.login-container{
+  position:relative;
+  z-index:2;
+  width:420px;
+  background:rgba(0,0,0,0.75);
+  backdrop-filter:blur(10px);
+  padding:30px;
+  border-radius:16px;
+  box-shadow:0 20px 60px rgba(0,0,0,0.5);
+}
+
+/* Signup page container - scrollable without scrollbar */
+#signupPage .login-container{
+  max-height:90vh;
+  overflow-y:scroll;
+  scrollbar-width:none; /* Firefox */
+  -ms-overflow-style:none; /* IE/Edge */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+#signupPage .login-container::-webkit-scrollbar {
+  display:none;
+}
+
 .university-header{
-  margin-bottom:25px;
+  text-align:center;
+  margin-bottom:20px;
 }
 
 .university-logo{
-  width:80px;
-  height:80px;
-  margin:0 auto 15px;
+  width:70px;
+  height:70px;
+  margin:0 auto 12px;
   background:linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   border-radius:50%;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:36px;
-  box-shadow:0 8px 20px rgba(102,126,234,0.3);
+  font-size:32px;
+  box-shadow:0 8px 20px rgba(102,126,234,0.4);
 }
 
 .university-name{
-  font-size:22px;
+  font-size:20px;
   font-weight:600;
   color:#667eea;
-  margin-bottom:5px;
+  margin-bottom:4px;
 }
 
 .university-subtitle{
-  font-size:13px;
-  color:#6b7280;
-  margin-bottom:20px;
+  font-size:12px;
+  color:#ddd;
+  margin-bottom:15px;
 }
 
 .login-container h2{
-  font-size:26px;
-  color:#1f2937;
-  margin-bottom:25px;
+  font-size:24px;
+  color:white;
+  margin-bottom:20px;
   font-weight:600;
+  text-align:center;
 }
 
 input{
   width:100%;
-  padding:12px 15px;
-  margin:10px 0;
-  border:2px solid #e5e7eb;
+  padding:10px 14px;
+  margin:6px 0;
+  border:2px solid rgba(255,255,255,0.2);
   border-radius:8px;
   font-size:14px;
   transition:0.3s;
+  background:rgba(255,255,255,0.1);
+  color:white;
+}
+
+input::placeholder{
+  color:rgba(255,255,255,0.6);
 }
 
 input:focus{
   outline:none;
-  border-color:#667eea;
+  border-color:#f39c12;
   box-shadow:0 0 0 3px rgba(102,126,234,0.1);
+  background:rgba(255,255,255,0.15);
+}
+
+label{
+  font-size:13px;
+  font-weight:500;
+  color:#ddd;
+  margin-bottom:4px;
+  margin-top:8px;
+  display:block;
+  text-align:left;
 }
 
 .password-input-wrapper{
   position:relative;
   width:100%;
-  margin:10px 0;
+  margin:6px 0;
 }
 
 .password-input-wrapper input{
@@ -132,7 +235,7 @@ input:focus{
   display:flex;
   align-items:center;
   justify-content:center;
-  color:#667eea;
+  color:#f39c12;
 }
 
 .password-toggle:hover{
@@ -149,17 +252,17 @@ input:focus{
 }
 
 .input-hint{
-  font-size:11px;
-  color:#6b7280;
-  margin-top:-8px;
-  margin-bottom:10px;
+  font-size:10px;
+  color:#bbb;
+  margin-top:-4px;
+  margin-bottom:6px;
   text-align:left;
   padding-left:5px;
 }
 
 button{
   width:100%;
-  padding:12px 14px;
+  padding:11px 14px;
   border:none;
   border-radius:8px;
   background:linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -168,7 +271,7 @@ button{
   font-size:15px;
   font-weight:600;
   transition:0.3s;
-  margin-top:10px;
+  margin-top:12px;
 }
 
 button:hover{
@@ -177,26 +280,75 @@ button:hover{
 }
 
 button:disabled{
-  background:#ccc;
+  background:#666;
   cursor:not-allowed;
   transform:none;
   box-shadow:none;
 }
 
-a{
-  color:#667eea;
-  cursor:pointer;
+.login-container p{
+  text-align:center;
+  margin-top:15px;
+  color:#ddd;
   font-size:14px;
-  font-weight:500;
 }
 
-a:hover{
+.login-container a{
+  color:#f39c12;
+  cursor:pointer;
+  font-weight:500;
+  text-decoration:none;
+}
+
+.login-container a:hover{
   text-decoration:underline;
 }
 
-/* ===== HEADER (FIXED) ===== */
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .login-page-wrapper{
+    padding:0 40px;
+  }
+  
+  .hero-text h1{
+    font-size:42px;
+  }
+}
+
+@media (max-width: 768px) {
+  .login-page-wrapper{
+    flex-direction:column;
+    padding:40px 20px;
+    justify-content:center;
+  }
+  
+  .hero-text{
+    width:100%;
+    text-align:center;
+    margin-bottom:40px;
+  }
+  
+  .hero-text h1{
+    font-size:36px;
+  }
+  
+  .hero-text p{
+    max-width:100%;
+  }
+  
+  .hero-text .features{
+    align-items:center;
+  }
+  
+  .login-container{
+    width:100%;
+    max-width:420px;
+  }
+}
+
+/* ===== HEADER (FIXED) - KEEP ORANGE ===== */
 header{
-  background:linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background:linear-gradient(135deg, #3498db 0%, #2980b9 100%);
   color:white;
   padding:16px 22px;
   display:flex;
@@ -263,7 +415,7 @@ header{
   position:absolute;
   bottom:-2px;
   right:-2px;
-  background:#667eea;
+  background:#f39c12;
   border-radius:50%;
   width:16px;
   height:16px;
@@ -322,9 +474,9 @@ header{
   padding-top:68px;
 }
 
-/* ===== SIDEBAR (FIXED) ===== */
+/* ===== SIDEBAR (FIXED) - DARK BLUE ===== */
 aside{
-  background:#1f2937;
+  background:#1a1a2e;
   color:white;
   padding:18px;
   position:fixed;
@@ -339,13 +491,14 @@ aside{
 aside h3{
   margin-bottom:16px;
   font-size:16px;
+  color:#ecf0f1;
 }
 
 aside a{
   display:block;
   padding:10px;
   margin-bottom:8px;
-  color:#d1d5db;
+  color:#bdc3c7;
   text-decoration:none;
   border-radius:6px;
   font-size:14px;
@@ -355,7 +508,7 @@ aside a{
 
 aside a:hover,
 aside a.active{
-  background:#374151;
+  background:#34495e;
   color:white;
   transform:translateX(8px);
 }
@@ -375,7 +528,6 @@ main{
   padding:30px 20px 20px 20px;
 }
 
-/* Custom scrollbar for content area */
 .content-scroll-area::-webkit-scrollbar {
   width: 8px;
 }
@@ -425,11 +577,11 @@ main{
 .card p{
   font-size:26px;
   font-weight:600;
-  color:#667eea;
+  color:#667eea; 
   margin-top:8px;
 }
 
-/* ===== TABLE WITH STICKY HEADER (FIXED GAP ISSUE) ===== */
+/* ===== TABLE WITH STICKY HEADER ===== */
 .table-wrapper{
   background:white;
   border-radius:8px;
@@ -453,7 +605,6 @@ thead{
   box-shadow:0 2px 8px rgba(0,0,0,0.15);
 }
 
-/* Add padding to cover gap above */
 thead::before{
   content:'';
   position:absolute;
@@ -658,12 +809,13 @@ tbody tr:hover{
   background:white;
   transition:0.3s;
   display:block;
+  color:#111827;
 }
 
 .search-box input:focus{
   outline:none;
-  border-color:#667eea;
-  box-shadow:0 0 0 3px rgba(102,126,234,0.1);
+  border-color:#f39c12;
+  box-shadow:0 0 0 3px rgba(243,156,18,0.1);
 }
 
 .search-box input::placeholder{
@@ -845,13 +997,13 @@ footer{
 }
 
 .confirm-modal-button.confirm {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
   color: white;
 }
 
 .confirm-modal-button.confirm:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 8px 20px rgba(243, 156, 18, 0.4);
 }
 
 .confirm-modal-button.confirm.danger {
@@ -891,49 +1043,133 @@ footer{
 
 <!-- LOGIN PAGE -->
 <div class="login-page-wrapper" id="loginPage">
+  <!-- LEFT SIDE HERO TEXT -->
+  <div class="hero-text">
+    <h1>WELCOME TO<br><span class="highlight" style="padding-left: 60px;">VELTECH LIBRARY</span></h1>
+    <p>
+      Your gateway to knowledge and learning. Access thousands of books, 
+      manage your borrowings effortlessly, and explore a world of resources.
+    </p>
+    
+    <div class="features">
+      <div class="feature-item">
+        <div class="icon">📚</div>
+        <span>Browse 1000+ Digital Books</span>
+      </div>
+      <div class="feature-item">
+        <div class="icon">⏱️</div>
+        <span>Easy Borrowing & Returns</span>
+      </div>
+      <div class="feature-item">
+        <div class="icon">🔔</div>
+        <span>Real-time Notifications</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT SIDE LOGIN BOX -->
   <div class="login-container">
     <div class="university-header">
-      <div class="university-logo">🎓</div>
+      <div class="university-logo">
+        <img src="logo.jpg" alt="Veltech Logo" style="width:100%; height:100%; object-fit:contain; border-radius:50%;">
+      </div>
       <div class="university-name">Veltech University</div>
       <div class="university-subtitle">Library Management System</div>
     </div>
     
     <h2>Student Login</h2>
-    <input type="email" id="loginEmail" placeholder="College Email (e.g., 21AT1A05C2@veltech.edu.in)">
-    <div class="input-hint">📧 Use your Veltech email address</div>
-    <input type="password" id="loginPassword" placeholder="Password">
+
+    <label>College Email</label>
+    <input type="email" id="loginEmail" placeholder="Enter Your Mail ID" autocomplete="off">
+
+    <label>Password</label>
+    <div class="password-input-wrapper">
+      <input type="password" id="loginPassword" placeholder="Enter your password" autocomplete="off">
+      <span class="password-toggle" onclick="togglePassword('loginPassword', this)">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+          <circle cx="12" cy="12" r="3"></circle>
+        </svg>
+      </span>
+    </div>
+    
     <button onclick="login()">Login</button>
-    <p style="margin-top:20px;">New Student? <a onclick="showSignup()">Signup</a></p>
+    <p>New Student? <a onclick="showSignup()">Signup</a></p>
   </div>
 </div>
 
 <!-- SIGNUP PAGE -->
 <div class="login-page-wrapper" id="signupPage" style="display:none">
+  <!-- LEFT SIDE HERO TEXT -->
+  <div class="hero-text">
+    <h1>JOIN<br><span class="highlight" style="padding-left: 60px;">VELTECH LIBRARY</span></h1>
+    <p>
+      Create your account and start your learning journey. Get instant 
+      access to our extensive collection of books and resources.
+    </p>
+    
+    <div class="features">
+      <div class="feature-item">
+        <div class="icon">✨</div>
+        <span>Quick & Easy Registration</span>
+      </div>
+      <div class="feature-item">
+        <div class="icon">🎓</div>
+        <span>Student-Friendly Interface</span>
+      </div>
+      <div class="feature-item">
+        <div class="icon">🔐</div>
+        <span>Secure Account Protection</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT SIDE SIGNUP BOX -->
   <div class="login-container">
     <div class="university-header">
-      <div class="university-logo">🎓</div>
+      <div class="university-logo">
+        <img src="logo.jpg" alt="Veltech Logo" style="width:100%; height:100%; object-fit:contain; border-radius:50%;">
+      </div>
       <div class="university-name">Veltech University</div>
       <div class="university-subtitle">Library Management System</div>
     </div>
-    
+
     <h2>Create Account</h2>
-    <input type="text" id="signupName" placeholder="Full Name">
-    <input type="text" id="signupStudentId" placeholder="Student ID (e.g., 21AT1A05C2)" maxlength="20">
+
+    <label>Full Name</label>
+    <input type="text" id="signupName" placeholder="Enter your full name" autocomplete="off">
+
+    <label>Student ID</label>
+    <input type="text" id="signupStudentId" placeholder="Enter your ID" maxlength="20" autocomplete="off">
+
+    <label>Email</label>
+    <input type="email" id="signupEmail" placeholder="STUDENTID@veltech.edu.in" autocomplete="off">
     <div class="input-hint">📧 Email format: YourStudentID@veltech.edu.in</div>
-    <input type="email" id="signupEmail" placeholder="Email (e.g., 21AT1A05A7@veltech.edu.in)">
-    
+
+    <label>Password</label>
     <div class="password-input-wrapper">
-      <input type="password" id="signupPassword" placeholder="Password (min 6 characters)">
-      <span class="password-toggle" onclick="togglePassword('signupPassword', this)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg></span>
+      <input type="password" id="signupPassword" placeholder="Min 6 characters" autocomplete="off">
+      <span class="password-toggle" onclick="togglePassword('signupPassword', this)">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+          <circle cx="12" cy="12" r="3"></circle>
+        </svg>
+      </span>
     </div>
-    
+
+    <label>Confirm Password</label>
     <div class="password-input-wrapper">
-      <input type="password" id="signupConfirmPassword" placeholder="Confirm Password">
-      <span class="password-toggle" onclick="togglePassword('signupConfirmPassword', this)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg></span>
+      <input type="password" id="signupConfirmPassword" placeholder="Re-enter password" autocomplete="off">
+      <span class="password-toggle" onclick="togglePassword('signupConfirmPassword', this)">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+          <circle cx="12" cy="12" r="3"></circle>
+        </svg>
+      </span>
     </div>
     
     <button onclick="signup()">Signup</button>
-    <p style="margin-top:20px;"><a onclick="showLogin()">Back to Login</a></p>
+    <p><a onclick="showLogin()">Back to Login</a></p>
   </div>
 </div>
 
@@ -984,15 +1220,16 @@ footer{
 <section id="overview">
 <div class="cards">
 <div class="card"><h4>Total Borrowed</h4><p id="totalBorrow">0</p></div>
-<div class="card"><h4>Total Books</h4><p id="totalBooks">30</p></div>
+<div class="card"><h4>Total Books</h4><p id="totalBooks">50</p></div>
 <div class="card"><h4>Total Fines</h4><p id="totalFines">₹0</p></div>
 </div>
 
-<h3>Recently Added Books</h3>
+<h3 class="section-title" style="display: block !important; visibility: visible !important; opacity: 1 !important; height: auto !important; min-height: 30px !important; font-size: 22px !important; color: #111827 !important; margin: 25px 0 15px 5px !important;">Recently Added Books</h3>
+
 <div class="table-wrapper">
 <table>
 <thead>
-<tr><th>ID</th><th>Book</th><th>Author</th><th>Available</th></tr>
+<tr><th>Book ID</th><th>Preview</th><th>Book Name</th><th>Author</th><th>Edition</th><th>Available</th><th>Status</th><th>Action</th></tr>
 </thead>
 <tbody id="recentBooksTable"></tbody>
 </table>
@@ -1000,14 +1237,14 @@ footer{
 </section>
 
 <section id="books" style="display:none">
-<h3>Engineering Library Books</h3>
+<h3>Veltech University Library - All Books</h3>
 <div class="search-box">
 <input type="text" id="searchInput" placeholder="Search by book or author...">
 </div>
 <div class="table-wrapper">
 <table>
 <thead>
-<tr><th>ID</th><th>Preview</th><th>Book Name</th><th>Author</th><th>Available</th><th>Status</th><th>Action</th></tr>
+<tr><th>ID</th><th>Preview</th><th>Book Name</th><th>Author</th><th>Edition</th><th>Available</th><th>Status</th><th>Action</th></tr>
 </thead>
 <tbody id="bookTable"></tbody>
 </table>
@@ -1045,54 +1282,63 @@ footer{
 </div>
 
 <script>
-// ===== BOOK IMAGES MAPPING =====
-const bookImages = {
-  1: "https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1186657123i/1672563.jpg",
-  2: "https://covers.openlibrary.org/b/isbn/9780201616224-L.jpg",
-  3: "https://covers.openlibrary.org/b/isbn/9780735619678-L.jpg",
-  4: "https://covers.openlibrary.org/b/isbn/9780201633610-L.jpg",
-  5: "https://covers.openlibrary.org/b/isbn/9780201485677-L.jpg",
-  6: "https://covers.openlibrary.org/b/isbn/9780262033848-L.jpg",
-  7: "https://covers.openlibrary.org/b/isbn/9781617292231-L.jpg",
-  8: "https://covers.openlibrary.org/b/isbn/9780201896831-L.jpg",
-  9: "https://covers.openlibrary.org/b/isbn/9780133594140-L.jpg",
-  10: "https://covers.openlibrary.org/b/isbn/9781118063330-L.jpg",
-  11: "https://covers.openlibrary.org/b/isbn/9780073523323-L.jpg",
-  12: "https://covers.openlibrary.org/b/isbn/9780131103627-L.jpg",
-  13: "https://covers.openlibrary.org/b/isbn/9780134685991-L.jpg",
-  14: "https://covers.openlibrary.org/b/isbn/9780596009205-L.jpg",
-  15: "https://covers.openlibrary.org/b/isbn/9781593279288-L.jpg",
-  16: "https://covers.openlibrary.org/b/isbn/9780136042594-L.jpg",
-  17: "https://covers.openlibrary.org/b/isbn/9780070428072-L.jpg",
-  18: "https://covers.openlibrary.org/b/isbn/9780262035613-L.jpg",
-  19: "https://covers.openlibrary.org/b/isbn/9781617294945-L.jpg",
-  20: "https://covers.openlibrary.org/b/isbn/9781491931820-L.jpg",
-  21: "https://covers.openlibrary.org/b/isbn/9781736049112-L.jpg",
-  22: "https://covers.openlibrary.org/b/isbn/9780672329463-L.jpg",
-  23: "https://covers.openlibrary.org/b/isbn/9780470887998-L.jpg",
-  24: "https://covers.openlibrary.org/b/isbn/9781484226032-L.jpg",
-  25: "https://covers.openlibrary.org/b/isbn/9780123747501-L.jpg",
-  26: "https://covers.openlibrary.org/b/isbn/9780321486813-L.jpg",
-  27: "https://covers.openlibrary.org/b/isbn/9780123814791-L.jpg",
-  28: "https://covers.openlibrary.org/b/isbn/9781449373320-L.jpg",
-  29: "https://covers.openlibrary.org/b/isbn/9780134527338-L.jpg",
-  30: "https://covers.openlibrary.org/b/isbn/9780078022128-L.jpg"
-};
 
-const DEFAULT_BOOK_IMAGE = "https://via.placeholder.com/60x80/667eea/ffffff?text=Book";
+const DEFAULT_BOOK_IMAGE = "https://via.placeholder.com/60x80/f39c12/ffffff?text=Book";
 
-// ===== FINE CALCULATION CONSTANTS =====
 const INITIAL_BORROW_DAYS = 15;
 const EXTENSION_DAYS = 10;
 const FINE_PER_WEEK = 20;
 
-// ===== PROFILE MENU TOGGLE =====
+function saveSession(student) {
+    localStorage.setItem('veltechLibrarySession', JSON.stringify({
+        student: student,
+        timestamp: new Date().getTime()
+    }));
+}
+
+function loadSession() {
+    const session = localStorage.getItem('veltechLibrarySession');
+    if (session) {
+        try {
+            const data = JSON.parse(session);
+            const sessionAge = new Date().getTime() - data.timestamp;
+            const maxAge = 7 * 24 * 60 * 60 * 1000;
+            
+            if (sessionAge < maxAge) {
+                return data.student;
+            } else {
+                clearSession();
+            }
+        } catch (e) {
+            console.error('Failed to parse session:', e);
+            clearSession();
+        }
+    }
+    return null;
+}
+
+function clearSession() {
+    localStorage.removeItem('veltechLibrarySession');
+}
+
+function clearLoginForm() {
+    document.getElementById('loginEmail').value = '';
+    document.getElementById('loginPassword').value = '';
+}
+
+function clearSignupForm() {
+    document.getElementById('signupName').value = '';
+    document.getElementById('signupStudentId').value = '';
+    document.getElementById('signupEmail').value = '';
+    document.getElementById('signupPassword').value = '';
+    document.getElementById('signupConfirmPassword').value = '';
+}
+
 function toggleProfileMenu() {
     const menu = document.getElementById('profileMenu');
     menu.classList.toggle('show');
 }
 
-// Close menu when clicking outside
 document.addEventListener('click', function(event) {
     const menu = document.getElementById('profileMenu');
     const profileWrapper = document.querySelector('.profile-image-wrapper');
@@ -1102,7 +1348,6 @@ document.addEventListener('click', function(event) {
     }
 });
 
-// ===== PROFILE PICTURE UPLOAD =====
 function handleProfileUpload(event) {
     const file = event.target.files[0];
     if (file) {
@@ -1128,7 +1373,6 @@ function handleProfileUpload(event) {
     }
 }
 
-// ===== DELETE PROFILE PICTURE =====
 function deleteProfilePicture() {
     showConfirm(
         'Are you sure you want to delete your profile picture? This action cannot be undone.',
@@ -1157,7 +1401,6 @@ function loadProfilePicture() {
     }
 }
 
-// ===== CALCULATE FINE =====
 function calculateFine(dueDate, isExtended = false) {
     const today = new Date();
     const due = new Date(dueDate);
@@ -1165,15 +1408,13 @@ function calculateFine(dueDate, isExtended = false) {
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
     
     if (diffDays <= 0) {
-        return 0; // No fine if not overdue
+        return 0;
     }
     
-    // Calculate weeks overdue (rounded up)
     const weeksOverdue = Math.ceil(diffDays / 7);
     return weeksOverdue * FINE_PER_WEEK;
 }
 
-// ===== CALCULATE DAYS LEFT =====
 function getDaysLeft(dueDate) {
     const today = new Date();
     const due = new Date(dueDate);
@@ -1182,14 +1423,12 @@ function getDaysLeft(dueDate) {
     return diffDays;
 }
 
-// ===== GET STATUS CLASS =====
 function getStatusClass(daysLeft) {
     if (daysLeft < 0) return 'overdue';
     if (daysLeft <= 3) return 'due-soon';
     return 'on-time';
 }
 
-// ===== TOAST NOTIFICATION SYSTEM =====
 function showToast(message, type = 'info') {
     const container = document.getElementById('toastContainer');
     const toast = document.createElement('div');
@@ -1216,7 +1455,6 @@ function showToast(message, type = 'info') {
     }, 4000);
 }
 
-// ===== PASSWORD VISIBILITY TOGGLE =====
 function togglePassword(inputId, toggleElement) {
     const input = document.getElementById(inputId);
     if (input.type === 'password') {
@@ -1230,7 +1468,6 @@ function togglePassword(inputId, toggleElement) {
     }
 }
 
-// ===== CONFIRMATION MODAL =====
 function showConfirm(message, onConfirm, options = {}) {
     const {
         title = 'Confirm Action',
@@ -1263,13 +1500,11 @@ function showConfirm(message, onConfirm, options = {}) {
     
     document.body.appendChild(overlay);
     
-    // Handle confirm button
     document.getElementById('confirmBtn').onclick = function() {
         overlay.remove();
         onConfirm();
     };
     
-    // Handle overlay click (close on outside click)
     overlay.onclick = function(e) {
         if (e.target === overlay) {
             overlay.remove();
@@ -1277,19 +1512,27 @@ function showConfirm(message, onConfirm, options = {}) {
     };
 }
 
-// ===== API CONFIGURATION =====
 const API_URL = "http://localhost:8080/api";
 let currentStudent = null;
 let books = [];
 let borrowed = [];
 
-// ===== EMAIL VALIDATION FOR VELTECH =====
 function validateVeltechEmail(email) {
     const veltechPattern = /^[a-zA-Z0-9._%+-]+@veltech\.edu\.in$/i;
     return veltechPattern.test(email);
 }
 
-// ===== LOGIN =====
+async function initializeDashboard(student) {
+    currentStudent = student;
+    document.getElementById('welcomeText').innerText = `Welcome ${currentStudent.fullName}`;
+    document.getElementById('loginPage').style.display = "none";
+    document.getElementById('signupPage').style.display = "none";
+    document.getElementById('dashboard').style.display = "block";
+    loadProfilePicture();
+    await loadBooks();
+    await loadBorrowed();
+}
+
 async function login() {
     const email = document.getElementById('loginEmail').value.trim();
     const password = document.getElementById('loginPassword').value.trim();
@@ -1315,14 +1558,14 @@ async function login() {
         });
         
         if (response.ok) {
-            currentStudent = await response.json();
-            document.getElementById('welcomeText').innerText = `Welcome ${currentStudent.fullName}`;
-            document.getElementById('loginPage').style.display = "none";
-            document.getElementById('dashboard').style.display = "block";
+            const student = await response.json();
+            saveSession(student);
+            localStorage.setItem("libraryLoggedIn", "true");
+            localStorage.setItem("studentData", JSON.stringify(student));
+
+            await initializeDashboard(student);
             showToast('Login successful! Welcome to Veltech Library.', 'success');
-            loadProfilePicture();
-            await loadBooks();
-            await loadBorrowed();
+            clearLoginForm();
         } else {
             const error = await response.text();
             showToast(error || 'Invalid credentials', 'error');
@@ -1332,7 +1575,6 @@ async function login() {
     }
 }
 
-// ===== SIGNUP =====
 async function signup() {
     const fullName = document.getElementById('signupName').value.trim();
     const studentId = document.getElementById('signupStudentId').value.trim();
@@ -1379,13 +1621,20 @@ async function signup() {
         
         if (response.ok) {
             const student = await response.json();
-            showToast(`Signup successful! Welcome to Veltech Library. Please login with your email: ${email}`, 'success');
-            document.getElementById('signupName').value = '';
-            document.getElementById('signupStudentId').value = '';
-            document.getElementById('signupEmail').value = '';
-            document.getElementById('signupPassword').value = '';
-            document.getElementById('signupConfirmPassword').value = '';
-            showLogin();
+            showToast(`Signup successful! Welcome to Veltech Library.`, 'success');
+            
+            const newUserEmail = email;
+            const newUserPassword = password;
+            
+            clearSignupForm();
+            document.getElementById('signupPage').style.display = "none";
+            document.getElementById('loginPage').style.display = "flex";
+            clearLoginForm();
+            
+            setTimeout(() => {
+                document.getElementById('loginEmail').value = newUserEmail;
+                document.getElementById('loginPassword').value = newUserPassword;
+            }, 200);
         } else {
             const error = await response.text();
             showToast(error || 'Signup failed', 'error');
@@ -1395,7 +1644,6 @@ async function signup() {
     }
 }
 
-// ===== LOAD BOOKS =====
 async function loadBooks() {
     try {
         const response = await fetch(`${API_URL}/books`);
@@ -1409,8 +1657,17 @@ async function loadBooks() {
     }
 }
 
-function getBookImage(bookId) {
-    return bookImages[bookId] || DEFAULT_BOOK_IMAGE;
+function getBookImage(book) {
+    if (book && typeof book === 'object' && book.image) {
+        return book.image;
+    }
+    if (typeof book === 'string') {
+        const foundBook = books.find(b => b.id === book);
+        if (foundBook && foundBook.image) {
+            return foundBook.image;
+        }
+    }
+    return DEFAULT_BOOK_IMAGE;
 }
 
 function displayBooks() {
@@ -1418,7 +1675,7 @@ function displayBooks() {
     books.forEach(b => {
         let status = b.availableQuantity > 0 ? "available" : "unavailable";
         let text = b.availableQuantity > 0 ? "Available" : "Not Available";
-        let bookImage = getBookImage(b.id);
+        let bookImage = getBookImage(b);
         
         html += `<tr>
             <td>${b.id}</td>
@@ -1426,16 +1683,17 @@ function displayBooks() {
                 <div class="view-wrapper">
                     <button class="view-btn">View</button>
                     <div class="hover-preview">
-                        <img src="${bookImage}" alt="${b.name}">
+                        <img src="${bookImage}" alt="${b.name}" onerror="this.src='${DEFAULT_BOOK_IMAGE}'">
                     </div>
                 </div>
             </td>
             <td>${b.name}</td>
             <td>${b.author}</td>
+            <td>${b.edition || 'N/A'}</td>
             <td>${b.availableQuantity}</td>
             <td><span class="status ${status}">${text}</span></td>
             <td>${b.availableQuantity > 0 ? 
-                `<button onclick="confirmBorrowBook(${b.id}, '${b.name.replace(/'/g, "\\'")}', '${b.author.replace(/'/g, "\\'")}')" style="width:auto;">Borrow</button>` : 
+                `<button onclick="confirmBorrowBook('${b.id}', '${b.name.replace(/'/g, "\\'")}', '${b.author.replace(/'/g, "\\'")}')" style="width:auto;">Borrow</button>` : 
                 `<button disabled style="width:auto;">Borrow</button>`}
             </td>
         </tr>`;
@@ -1443,7 +1701,6 @@ function displayBooks() {
     document.getElementById('bookTable').innerHTML = html;
 }
 
-// ===== CONFIRM BORROW BOOK =====
 function confirmBorrowBook(bookId, bookName, bookAuthor) {
     showConfirm(
         `Do you want to borrow "${bookName}" by ${bookAuthor}? You will have ${INITIAL_BORROW_DAYS} days to return it.`,
@@ -1460,12 +1717,39 @@ function confirmBorrowBook(bookId, bookName, bookAuthor) {
 }
 
 function loadRecentBooks() {
-    document.getElementById('recentBooksTable').innerHTML = books.slice(-5).reverse()
-        .map(b => `<tr><td>${b.id}</td><td>${b.name}</td><td>${b.author}</td><td>${b.availableQuantity}</td></tr>`)
-        .join("");
+    const recentBooks = books.slice(-5).reverse();
+    let html = "";
+    
+    recentBooks.forEach(b => {
+        let status = b.availableQuantity > 0 ? "available" : "unavailable";
+        let text = b.availableQuantity > 0 ? "Available" : "Not Available";
+        let bookImage = getBookImage(b);
+        
+        html += `<tr>
+            <td>${b.id}</td>
+            <td>
+                <div class="view-wrapper">
+                    <button class="view-btn">View</button>
+                    <div class="hover-preview">
+                        <img src="${bookImage}" alt="${b.name}" onerror="this.src='${DEFAULT_BOOK_IMAGE}'">
+                    </div>
+                </div>
+            </td>
+            <td>${b.name}</td>
+            <td>${b.author}</td>
+            <td>${b.edition || 'N/A'}</td>
+            <td>${b.availableQuantity}</td>
+            <td><span class="status ${status}">${text}</span></td>
+            <td>${b.availableQuantity > 0 ? 
+                `<button onclick="confirmBorrowBook('${b.id}', '${b.name.replace(/'/g, "\\'")}', '${b.author.replace(/'/g, "\\'")}')" style="width:auto;">Borrow</button>` : 
+                `<button disabled style="width:auto;">Borrow</button>`}
+            </td>
+        </tr>`;
+    });
+    
+    document.getElementById('recentBooksTable').innerHTML = html;
 }
 
-// ===== BORROW BOOK =====
 async function borrowBook(bookId) {
     try {
         const response = await fetch(`${API_URL}/borrow`, {
@@ -1490,7 +1774,6 @@ async function borrowBook(bookId) {
     }
 }
 
-// ===== EXTEND BOOK =====
 async function extendBook(borrowedBookId, bookName) {
     showConfirm(
         `Do you want to extend "${bookName}" for ${EXTENSION_DAYS} more days?`,
@@ -1520,7 +1803,6 @@ async function extendBook(borrowedBookId, bookName) {
     );
 }
 
-// ===== LOAD BORROWED BOOKS =====
 async function loadBorrowed() {
     try {
         const response = await fetch(`${API_URL}/borrow/student/${currentStudent.studentId}`);
@@ -1535,7 +1817,7 @@ async function loadBorrowed() {
 
 function displayBorrowed() {
     document.getElementById('borrowTable').innerHTML = borrowed.map(b => {
-        let bookImage = getBookImage(b.book.id);
+        let bookImage = getBookImage(b.book);
         const daysLeft = getDaysLeft(b.dueDate);
         const statusClass = getStatusClass(daysLeft);
         const fine = calculateFine(b.dueDate, b.extended);
@@ -1544,7 +1826,7 @@ function displayBorrowed() {
         
         return `<tr>
             <td>${b.book.id}</td>
-            <td><img src="${bookImage}" class="borrowed-img" alt="${b.book.name}"></td>
+            <td><img src="${bookImage}" class="borrowed-img" alt="${b.book.name}" onerror="this.src='${DEFAULT_BOOK_IMAGE}'"></td>
             <td>${b.book.name}</td>
             <td>${b.book.author}</td>
             <td>${new Date(b.issueDate).toLocaleDateString()}</td>
@@ -1557,13 +1839,13 @@ function displayBorrowed() {
 
 function displayReturn() {
     document.getElementById('returnTable').innerHTML = borrowed.map(b => {
-        let bookImage = getBookImage(b.book.id);
+        let bookImage = getBookImage(b.book);
         const fine = calculateFine(b.dueDate, b.extended);
         const canExtend = !b.extended;
         
         return `<tr>
             <td>${b.book.id}</td>
-            <td><img src="${bookImage}" class="borrowed-img" alt="${b.book.name}"></td>
+            <td><img src="${bookImage}" class="borrowed-img" alt="${b.book.name}" onerror="this.src='${DEFAULT_BOOK_IMAGE}'"></td>
             <td>${b.book.name}</td>
             <td>${b.book.author}</td>
             <td>${new Date(b.dueDate).toLocaleDateString()}</td>
@@ -1576,7 +1858,6 @@ function displayReturn() {
     }).join("");
 }
 
-// ===== CONFIRM RETURN BOOK =====
 function confirmReturnBook(borrowedBookId, bookName, fine = 0) {
     const message = fine > 0 
         ? `Are you sure you want to return "${bookName}"? You have a pending fine of ₹${fine}.`
@@ -1596,7 +1877,6 @@ function confirmReturnBook(borrowedBookId, bookName, fine = 0) {
     );
 }
 
-// ===== RETURN BOOK =====
 async function returnBook(borrowedBookId) {
     try {
         const response = await fetch(`${API_URL}/borrow/return/${borrowedBookId}`, {
@@ -1616,11 +1896,9 @@ async function returnBook(borrowedBookId) {
     }
 }
 
-// ===== UPDATE STATS =====
 function updateStats() {
     document.getElementById('totalBorrow').innerText = borrowed.length;
     
-    // Calculate total fines
     const totalFines = borrowed.reduce((sum, b) => {
         return sum + calculateFine(b.dueDate, b.extended);
     }, 0);
@@ -1628,7 +1906,6 @@ function updateStats() {
     document.getElementById('totalFines').innerText = `₹${totalFines}`;
 }
 
-// ===== SEARCH BOOKS =====
 let searchTimeout;
 document.addEventListener('DOMContentLoaded', function() {
     const searchInput = document.getElementById('searchInput');
@@ -1653,16 +1930,32 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 300);
         });
     }
+    
+    checkExistingSession();
 });
 
-// ===== UI FUNCTIONS =====
+async function checkExistingSession() {
+    clearLoginForm();
+    clearSignupForm();
+    
+    const savedStudent = loadSession();
+    if (savedStudent) {
+        await initializeDashboard(savedStudent);
+    }
+}
+
 function logout() {
     showConfirm(
         'Are you sure you want to logout? You will need to login again to access your account.',
         function() {
+            clearSession();
+            localStorage.removeItem("libraryLoggedIn");
+            localStorage.removeItem("studentData");
+
             currentStudent = null;
             books = [];
             borrowed = [];
+            clearLoginForm();
             showToast('Logged out successfully', 'info');
             setTimeout(() => location.reload(), 1000);
         },
@@ -1676,11 +1969,25 @@ function logout() {
 }
 
 function showSignup() {
+    document.getElementById('loginEmail').value = '';
+    document.getElementById('loginPassword').value = '';
+    document.getElementById('signupName').value = '';
+    document.getElementById('signupStudentId').value = '';
+    document.getElementById('signupEmail').value = '';
+    document.getElementById('signupPassword').value = '';
+    document.getElementById('signupConfirmPassword').value = '';
+    
     document.getElementById('loginPage').style.display = "none";
     document.getElementById('signupPage').style.display = "flex";
 }
 
 function showLogin() {
+    document.getElementById('signupName').value = '';
+    document.getElementById('signupStudentId').value = '';
+    document.getElementById('signupEmail').value = '';
+    document.getElementById('signupPassword').value = '';
+    document.getElementById('signupConfirmPassword').value = '';
+    
     document.getElementById('signupPage').style.display = "none";
     document.getElementById('loginPage').style.display = "flex";
 }
@@ -1691,12 +1998,28 @@ function showSection(id) {
     document.querySelectorAll("aside a").forEach(a => a.classList.remove("active"));
     event.target.classList.add("active");
     
-    // Reset scroll position to top when switching sections
     const scrollArea = document.querySelector('.content-scroll-area');
     if (scrollArea) {
         scrollArea.scrollTop = 0;
     }
 }
+
+window.onload = function(){
+    const emailBox = document.getElementById("loginEmail");
+    const passBox = document.getElementById("loginPassword");
+
+    if(emailBox) emailBox.value = "";
+    if(passBox) passBox.value = "";
+
+    const loggedIn = localStorage.getItem("libraryLoggedIn");
+    const studentData = localStorage.getItem("studentData");
+
+    if(loggedIn === "true" && studentData){
+        const student = JSON.parse(studentData);
+        initializeDashboard(student);
+    }
+}; 
+
 </script>
 </body>
 </html>
