@@ -57,10 +57,10 @@ Designed for real-world usage and placement-level full stack demonstration.
 ![View Book](images/viewBooks.png)
 
 ### 📖 Issue Book
-![Borrowed Book](images/Borrowed Books.png)
+![Borrowed Book](images/borrowedbooks.png)
 
 ### 📖 Return Book
-![Return Book](images/Return books.png)
+![Return Book](images/returnbooks.png)
 
 ---
 
