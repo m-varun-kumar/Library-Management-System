@@ -89,7 +89,6 @@ This project was built for:
 
 ## 👨‍💻 Developed By
 **M Varun Kumar**   
-]
 
 ---
 
