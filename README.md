@@ -89,8 +89,7 @@ This project was built for:
 
 ## 👨‍💻 Developed By
 **M Varun Kumar**   
-Java Full Stack Developer  
-DSA | Java | MySQL | System Design  
+]
 
 ---
 
